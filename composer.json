@@ -1,5 +1,5 @@
 {
-    "name": "graphene/nova-permissions",
+    "name": "graphene-ict/nova-permissions",
     "description": "Nova Permissions tool based on spatie permissions",
     "type": "composer-plugin",
     "require": {
