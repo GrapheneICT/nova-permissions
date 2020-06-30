@@ -186,9 +186,20 @@ It should now work as exptected. Just create a Role, modify its Permissions and 
 
 ### Super Admin
  
-
-
 > You can modify this function as you please.
+
+```php
+class User {
+    /**
+     * Determines if the User is a Super admin
+     * @return null
+    */
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('super-admin');
+    }
+}
+```
 
 ### Scope Resource for User
 
