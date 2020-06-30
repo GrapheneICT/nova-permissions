@@ -11,7 +11,18 @@
         {
             "name": "Jovan Stojiljkovic",
             "email": "jstojiljkovic941@gmail.com"
+        }    ],
+    "autoload": {
+        "psr-4": {
+            "Graphene\\NovaPermissions\\": "src/"
         }
-    ],
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Graphene\\NovaPermissions\\ToolServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev"
 }
