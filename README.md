@@ -14,7 +14,6 @@ We have a Migration, Seed, Policy and Resource ready for a good Authorization Ex
     * [Detail View](#detail-view)
     * [Edit View](#edit-view)
     * [Create a Model Policy](#create-a-model-policy)
-    * [Super Admin](#super-admin)
     * [Scope Resource for User](#scope-resource-for-user)
 3. [Customization](#customization)
     * [Use your own Resources](#use-your-own-resources)
@@ -107,6 +106,24 @@ class User extends Authenticatable
 }
 ```
 
+A Super Admin can do everything. If you extend our Policy, make sure to add a isSuperAdmin() Function to your App\User Model:
+
+> You can modify this function as you please.
+
+```php
+class User {
+    /**
+     * Determines if the User is a Super admin
+     * @return null
+    */
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('super-admin');
+    }
+}
+```
+
+
 ### Database Seeding
 
 Publish our Seeder with the following command:
@@ -183,23 +200,6 @@ It should now work as exptected. Just create a Role, modify its Permissions and 
 > `view own users` is superior to `view users` and allows the User to only view his own Users.
 
 > `manage own users` is superior to `manage users` and allows the User to only manage his own Users.
-
-### Super Admin
- 
-> You can modify this function as you please.
-
-```php
-class User {
-    /**
-     * Determines if the User is a Super admin
-     * @return null
-    */
-    public function isSuperAdmin()
-    {
-        return $this->hasRole('super-admin');
-    }
-}
-```
 
 ### Scope Resource for User
 
