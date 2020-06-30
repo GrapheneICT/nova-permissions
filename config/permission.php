@@ -19,7 +19,7 @@ return [
 		 * The model you want to use as a Role model needs to implement the
 		 * `Spatie\Permission\Contracts\Role` contract.
 		 */
-		'role'       => Eminiarts\NovaPermissions\Role::class,
+		'role'       => \GrapheneICT\NovaPermissions\Role::class,
 	],
 	'table_names'                     => [
 		/*
