@@ -1,0 +1,74 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
+use App\Models\User;
+
+class RolesAndPermissionsSeeder extends Seeder
+{
+/**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
+        $collection = collect([
+            User::class,
+            Role::class,
+            Permission::class,
+            // ... // List all your Models you want to have Permissions for.
+        ]);
+
+        $collection->each(function ($item, $key) {
+            // create permissions for each collection item
+            $group = $this->getGroupName($item);
+            $permission = $this->getPermissionName($item);
+
+            Permission::create(['group' => $group, 'name' => 'view ' . $permission]);
+            Permission::create(['group' => $group, 'name' => 'view own ' . $permission]);
+            Permission::create(['group' => $group, 'name' => 'manage ' . $permission]);
+            Permission::create(['group' => $group, 'name' => 'manage own ' . $permission]);
+            Permission::create(['group' => $group, 'name' => 'restore ' . $permission]);
+            Permission::create(['group' => $group, 'name' => 'forceDelete ' . $permission]);
+        });
+
+        // Create a Super-Admin Role and assign all Permissions
+        $role = Role::create(['name' => 'super-admin']);
+        $role->givePermissionTo(Permission::all());
+
+        // Give User Super-Admin Role
+        // $user = App\Models\User::whereEmail('your@email.com')->first(); // Change this to your email.
+        // $user->assignRole('super-admin');
+    }
+
+    /**
+     * Get group name based on the model class provided
+     *
+     * @param $class
+     *
+     * @return string
+     */
+    private function getGroupName($class)
+    {
+        return Str::plural(Str::title(Str::snake(class_basename($class), ' ')));
+    }
+
+    /**
+     * Get permission name based on the model class provided
+     *
+     * @param $class
+     *
+     * @return string
+     */
+    private function getPermissionName($class)
+    {
+        return Str::plural(Str::snake(class_basename($class), ' '));
+    }
+}

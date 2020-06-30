@@ -1,0 +1,17 @@
+{
+    "name": "graphene/nova-permissions",
+    "description": "Nova Permissions tool based on spatie permissions",
+    "type": "composer-plugin",
+    "require": {
+        "php": ">= 7.2.0",
+        "spatie/laravel-permission": "3.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jovan Stojiljkovic",
+            "email": "jstojiljkovic941@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
