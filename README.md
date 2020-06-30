@@ -8,8 +8,8 @@ We have a Migration, Seed, Policy and Resource ready for a good Authorization Ex
 
 1. [Installation](#Installation)
     * [Database Migration](#database-migration)
+    * [Configuration](#configuration)
     * [Database Seeding](#database-seeding)
-    * [Additional Configuration](#additional-configuration)
 2. [Permissions](#permissions)
     * [Detail View](#detail-view)
     * [Edit View](#edit-view)
@@ -41,49 +41,7 @@ Migrate the Database:
 php artisan migrate
 ```
 
-### Database Seeding
-
-Publish our Seeder with the following command:
-
-```
-php artisan vendor:publish --provider="GrapheneICT\NovaPermissions\ToolServiceProvider" --tag="seeds"
-```
-
-This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeds`. List all your Models you want to have Permissions for in the `$collection` Array and change the email for the Super-Admin:
-
-```php
-class RolesAndPermissionsSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        // Reset cached roles and permissions
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-
-        $collection = collect([
-            User::class,
-            Role::class,
-            Permission::class,
-            // ... // List all your Models you want to have Permissions for.
-        ]);
-   
-         $user = App\Models\User::whereEmail('your@email.com')->first(); // Change this to your email.
-         $user->assignRole('super-admin');
-
-    }
-}
-```
-
-Now you can seed the Database. Add `$this->call(RolesAndPermissionsSeeder::class);` to the `DatabaseSeeder`.
-
-> **Note**: If this doesn't work, run `composer dumpautoload` to autoload the Seeder.
-
-
-### Additional configuration
+### Configuration
 
 You must register the tool with Nova. This is typically done in the `tools` method of the `NovaServiceProvider`.
 
@@ -149,6 +107,47 @@ class User extends Authenticatable
 }
 ```
 
+### Database Seeding
+
+Publish our Seeder with the following command:
+
+```
+php artisan vendor:publish --provider="GrapheneICT\NovaPermissions\ToolServiceProvider" --tag="seeds"
+```
+
+This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeds`. List all your Models you want to have Permissions for in the `$collection` Array and change the email for the Super-Admin:
+
+```php
+class RolesAndPermissionsSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
+        $collection = collect([
+            User::class,
+            Role::class,
+            Permission::class,
+            // ... // List all your Models you want to have Permissions for.
+        ]);
+   
+         $user = App\Models\User::whereEmail('your@email.com')->first(); // Change this to your email.
+         $user->assignRole('super-admin');
+
+    }
+}
+```
+
+Now you can seed the Database. Add `$this->call(RolesAndPermissionsSeeder::class);` to the `DatabaseSeeder`.
+
+> **Note**: If this doesn't work, run `composer dumpautoload` to autoload the Seeder.
+
 ## Permissions
 
 ### Detail View
@@ -187,20 +186,7 @@ It should now work as exptected. Just create a Role, modify its Permissions and 
 
 ### Super Admin
  
- A Super Admin can do everything. If you extend our Policy, make sure to add a `isSuperAdmin()` Function to your `App\User` Model:
- 
- ```php
- class User {
-     /**
-      * Determines if the User is a Super admin
-      * @return null
-     */
-     public function isSuperAdmin()
-     {
-         return $this->hasRole('super-admin');
-     }
- }
- ```
+
 
 > You can modify this function as you please.
 
