@@ -1,6 +1,6 @@
 <?php
 
-namespace Graphene\NovaPermissions\Nova\Fields;
+namespace GrapheneICT\NovaPermissions\Nova\Fields;
 
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;

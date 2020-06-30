@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Graphene\NovaPermissions\Nova;
+namespace GrapheneICT\NovaPermissions\Nova;
 
-use Graphene\NovaPermissions\Nova\Fields\Checkbox;
+use GrapheneICT\NovaPermissions\Nova\Fields\Checkbox;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Resource;
 use Laravel\Nova\Fields\ID;
@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\BelongsToMany;
-use Graphene\NovaPermissions\Role as RoleModel;
+use GrapheneICT\NovaPermissions\Role as RoleModel;
 use Spatie\Permission\Models\Permission as SpatiePermission;
 
 class Role extends Resource
