@@ -1,8 +1,8 @@
 <?php
 
-namespace Graphene\NovaPermissions;
+namespace GrapheneICT\NovaPermissions;
 
-use Graphene\NovaPermissions\Http\Middleware\Authorize;
+use GrapheneICT\NovaPermissions\Http\Middleware\Authorize;
 use Laravel\Nova\Nova;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Events\ServingNova;

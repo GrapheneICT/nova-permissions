@@ -1,8 +1,8 @@
 <?php
 
-namespace Graphene\NovaPermissions\Nova;
+namespace GrapheneICT\NovaPermissions\Nova;
 
-use Graphene\NovaPermissions\Role;
+use GrapheneICT\NovaPermissions\Role;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Resource;
 use Laravel\Nova\Fields\ID;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Graphene\NovaPermissions\Nova;
+namespace GrapheneICT\NovaPermissions\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Resource as NovaResource;

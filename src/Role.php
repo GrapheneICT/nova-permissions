@@ -1,6 +1,6 @@
 <?php
 
-namespace Graphene\NovaPermissions;
+namespace GrapheneICT\NovaPermissions;
 
 use Spatie\Permission\Models\Role as SpatieRole;
 
