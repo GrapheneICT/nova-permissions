@@ -184,8 +184,8 @@ It should now work as exptected. Just create a Role, modify its Permissions and 
 > `view own users` is superior to `view users` and allows the User to only view his own Users.
 
 > `manage own users` is superior to `manage users` and allows the User to only manage his own Users.
->
->### Super Admin
+
+### Super Admin
  
  A Super Admin can do everything. If you extend our Policy, make sure to add a `isSuperAdmin()` Function to your `App\User` Model:
  
