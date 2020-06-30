@@ -177,7 +177,7 @@ Now you can seed the Database. Add `$this->call(RolesAndPermissionsSeeder::class
 
 You can extend `GrapheneICT\NovaPermissions\Policies\Policy` and have a very clean Model Policy that works with Nova.
 
-For Example: Create a new Contact Policy with `php artisan make:policy ContactPolicy` with the following code:
+For Example: Create a new User Policy with `php artisan make:policy UserPolicy` with the following code:
 
 ```php
 class UserPolicy extends Policy
