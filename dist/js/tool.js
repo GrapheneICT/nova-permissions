@@ -212,9 +212,9 @@ module.exports = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 Nova.booting(function (Vue, router) {
-    Vue.component('index-FieldCheckboxes', __webpack_require__(4));
-    Vue.component('detail-FieldCheckboxes', __webpack_require__(7));
-    Vue.component('form-FieldCheckboxes', __webpack_require__(13));
+    Vue.component('index-PermissionCheckBox', __webpack_require__(4));
+    Vue.component('detail-PermissionCheckBox', __webpack_require__(7));
+    Vue.component('form-PermissionCheckBox', __webpack_require__(13));
 });
 
 /***/ }),
