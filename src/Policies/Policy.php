@@ -30,7 +30,7 @@ class Policy
 	 */
 	public function create(User $user)
 	{
-		return $user->hasAnyPermission(['manage ' . static::$key, 'manage own ' . static::$key]);
+		return $user->hasPermissionTo(static::$key . '.create');
 	}
 	
 	/**
@@ -39,17 +39,9 @@ class Policy
 	 * @param  User $user
 	 * @return mixed
 	 */
-	public function delete(User $user, $model)
+	public function delete(User $user)
 	{
-		if ($user->hasPermissionTo('manage ' . static::$key) ) {
-			return true;
-		}
-		
-		if ($user->hasPermissionTo('manage own ' . static::$key)) {
-			return $user->id == $model->user_id;
-		}
-		
-		return false;
+		return $user->hasPermissionTo(static::$key . '.delete');
 	}
 	
 	/**
@@ -58,17 +50,9 @@ class Policy
 	 * @param  User $user
 	 * @return mixed
 	 */
-	public function forceDelete(User $user, $model)
+	public function forceDelete(User $user)
 	{
-		if ($user->hasPermissionTo('forceDelete ' . static::$key)) {
-			return true;
-		}
-		
-		if ($user->hasPermissionTo('manage own ' . static::$key) && $user->hasPermissionTo('forceDelete ' . static::$key)) {
-			return $user->id == $model->user_id;
-		}
-		
-		return false;
+		return $user->hasPermissionTo(static::$key . '.destroy');
 	}
 	
 	/**
@@ -77,17 +61,9 @@ class Policy
 	 * @param  User $user
 	 * @return mixed
 	 */
-	public function restore(User $user, $model)
+	public function restore(User $user)
 	{
-		if ($user->hasPermissionTo('restore ' . static::$key)) {
-			return true;
-		}
-		
-		if ($user->hasPermissionTo('manage own ' . static::$key) && $user->hasPermissionTo('restore ' . static::$key)) {
-			return $user->id == $model->user_id;
-		}
-		
-		return false;
+		return $user->hasPermissionTo(static::$key . '.restore');
 	}
 	
 	/**
@@ -96,17 +72,9 @@ class Policy
 	 * @param  User $user
 	 * @return mixed
 	 */
-	public function update(User $user, $model)
+	public function update(User $user)
 	{
-		if ($user->hasPermissionTo('manage ' . static::$key)) {
-			return true;
-		}
-		
-		if ($user->hasPermissionTo('manage own ' . static::$key)) {
-			return $user->id == $model->user_id;
-		}
-		
-		return false;
+		return $user->hasPermissionTo(static::$key . '.update');
 	}
 	
 	/**
@@ -115,17 +83,9 @@ class Policy
 	 * @param  User $user
 	 * @return mixed
 	 */
-	public function view(User $user, $model)
+	public function view(User $user)
 	{
-		if ($user->hasPermissionTo('view ' . static::$key)) {
-			return true;
-		}
-		
-		if ($user->hasPermissionTo('view own ' . static::$key)) {
-			return $user->id == $model->user_id;
-		}
-		
-		return false;
+		return $user->hasPermissionTo(static::$key . '.view');
 	}
 	
 	/**
@@ -135,6 +95,6 @@ class Policy
 	 */
 	public function viewAny(User $user)
 	{
-		return $user->hasPermissionTo('view ' . static::$key);
+		return $user->hasPermissionTo(static::$key . '.view');
 	}
 }

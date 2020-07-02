@@ -31,12 +31,12 @@ class RolesAndPermissionsSeeder extends Seeder
             $group = $this->getGroupName($item);
             $permission = $this->getPermissionName($item);
 
-            Permission::create(['group' => $group, 'name' => 'view ' . $permission]);
-            Permission::create(['group' => $group, 'name' => 'view own ' . $permission]);
-            Permission::create(['group' => $group, 'name' => 'manage ' . $permission]);
-            Permission::create(['group' => $group, 'name' => 'manage own ' . $permission]);
-            Permission::create(['group' => $group, 'name' => 'restore ' . $permission]);
-            Permission::create(['group' => $group, 'name' => 'forceDelete ' . $permission]);
+            Permission::create(['group' => $group, 'name' =>  $permission . '.view']);
+            Permission::create(['group' => $group, 'name' =>  $permission . '.create']);
+            Permission::create(['group' => $group, 'name' =>  $permission . '.update']);
+            Permission::create(['group' => $group, 'name' =>  $permission . '.delete']);
+            Permission::create(['group' => $group, 'name' =>  $permission . '.destroy']);
+            Permission::create(['group' => $group, 'name' =>  $permission . '.restore']);
         });
 
         // Create a Super-Admin Role and assign all Permissions
