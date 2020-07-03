@@ -31,12 +31,36 @@ class RolesAndPermissionsSeeder extends Seeder
             $group = $this->getGroupName($item);
             $permission = $this->getPermissionName($item);
 
-            Permission::create(['group' => $group, 'name' =>  $permission . '.view']);
-            Permission::create(['group' => $group, 'name' =>  $permission . '.create']);
-            Permission::create(['group' => $group, 'name' =>  $permission . '.update']);
-            Permission::create(['group' => $group, 'name' =>  $permission . '.delete']);
-            Permission::create(['group' => $group, 'name' =>  $permission . '.destroy']);
-            Permission::create(['group' => $group, 'name' =>  $permission . '.restore']);
+              Permission::create([
+                    'group' => $group,
+                    'name' =>  $permission . '.view',
+                    'description' => 'Allow the user to view a list of ' . strtolower($group) . ' as well as the details'
+                    ]);
+                    Permission::create([
+                        'group' => $group,
+                        'name' =>  $permission . '.create',
+                        'description' => 'Allow the user to add new ' . strtolower($group)
+                    ]);
+                    Permission::create([
+                        'group' => $group,
+                        'name' =>  $permission . '.update',
+                        'description' => 'Allow the user to update existing ' . strtolower($group)
+                    ]);
+                    Permission::create([
+                        'group' => $group,
+                        'name' =>  $permission . '.delete',
+                        'description' => 'Allow the user to delete ' . strtolower($group)
+                    ]);
+                    Permission::create([
+                        'group' => $group,
+                        'name' =>  $permission . '.destroy',
+                        'description' => 'Allow the user to destroy ' . strtolower($group)
+                    ]);
+                    Permission::create([
+                        'group' => $group,
+                        'name' =>  $permission . '.restore',
+                        'description' => 'Allow the user to restore ' . strtolower($group)
+                    ]);
         });
 
         // Create a Super-Admin Role and assign all Permissions

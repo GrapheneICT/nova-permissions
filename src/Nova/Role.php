@@ -113,7 +113,7 @@ class Role extends Resource
 				return [
 					'group'  => __(ucfirst($permission->group)),
 					'option' => $permission->name,
-					'label'  => __($permission->name),
+					'label'  => __($permission->description),
 				];
 			})->groupBy('group')->toArray())
 			,
