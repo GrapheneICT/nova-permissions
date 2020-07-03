@@ -27,7 +27,7 @@ abstract class ResourceForUser extends NovaResource
 		}
 		
 		// User Can View all Entries and is not restricted to its own
-		if (!$user->hasPermissionTo('view own ' . parent::uriKey()) && $user->hasPermissionTo('view ' . parent::uriKey())) {
+		if (!$user->hasPermissionTo(parent::uriKey() . '.view')) {
 			return $query;
 		}
 		
@@ -52,7 +52,7 @@ abstract class ResourceForUser extends NovaResource
 		}
 		
 		// If the User has only Permission to view his own Entries, we scope the query.
-		if ($user->hasPermissionTo('view own ' . parent::uriKey())) {
+		if ($user->hasPermissionTo(parent::uriKey() . '.view')) {
 			return $query->where('user_id', $user->id);
 		}
 		
@@ -79,7 +79,7 @@ abstract class ResourceForUser extends NovaResource
 		}
 		
 		// User Can View all Entries and is not restricted to its own
-		if (!$user->hasPermissionTo('view own ' . parent::uriKey()) && $user->hasPermissionTo('view ' . parent::uriKey())) {
+		if (!$user->hasPermissionTo(parent::uriKey() . '.view')) {
 			return parent::relatableQuery($request, $query);
 		}
 		
@@ -104,7 +104,7 @@ abstract class ResourceForUser extends NovaResource
 		}
 		
 		// User Can View all Entries and is not restricted to its own
-		if (!$user->hasPermissionTo('view own ' . parent::uriKey()) && $user->hasPermissionTo('view ' . parent::uriKey())) {
+		if ($user->hasPermissionTo(parent::uriKey() . '.view')) {
 			return $query;
 		}
 		
