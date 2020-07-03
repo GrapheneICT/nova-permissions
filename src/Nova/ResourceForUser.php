@@ -21,11 +21,6 @@ abstract class ResourceForUser extends NovaResource
 	{
 		$user = $request->user();
 		
-		// Super Admin
-		if ($user->isSuperAdmin()) {
-			return $query;
-		}
-		
 		// User Can View all Entries and is not restricted to its own
 		if (!$user->hasPermissionTo(parent::uriKey() . '.view')) {
 			return $query;
@@ -45,11 +40,6 @@ abstract class ResourceForUser extends NovaResource
 	public static function indexQuery(NovaRequest $request, $query)
 	{
 		$user = $request->user();
-		
-		// Super Admin
-		if ($user->isSuperAdmin()) {
-			return $query;
-		}
 		
 		// If the User has only Permission to view his own Entries, we scope the query.
 		if ($user->hasPermissionTo(parent::uriKey() . '.view')) {
@@ -73,11 +63,6 @@ abstract class ResourceForUser extends NovaResource
 	{
 		$user = $request->user();
 		
-		// Super Admin
-		if ($user->isSuperAdmin()) {
-			return parent::relatableQuery($request, $query);
-		}
-		
 		// User Can View all Entries and is not restricted to its own
 		if (!$user->hasPermissionTo(parent::uriKey() . '.view')) {
 			return parent::relatableQuery($request, $query);
@@ -97,11 +82,6 @@ abstract class ResourceForUser extends NovaResource
 	public static function scoutQuery(NovaRequest $request, $query)
 	{
 		$user = $request->user();
-		
-		// Super Admin
-		if ($user->isSuperAdmin()) {
-			return $query;
-		}
 		
 		// User Can View all Entries and is not restricted to its own
 		if ($user->hasPermissionTo(parent::uriKey() . '.view')) {

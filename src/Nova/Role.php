@@ -105,9 +105,6 @@ class Role extends Resource
 			Select::make(__('Guard Name'), 'guard_name')
 				->options($guardOptions->toArray())
 				->rules(['required', Rule::in($guardOptions)])
-				->canSee(function ($request) {
-					return $request->user()->isSuperAdmin();
-				})
 			,
 			Checkbox::make(__('Permissions'), 'prepared_permissions')->withGroups()->options(SpatiePermission::all()->map(function ($permission, $key) {
 				return [
