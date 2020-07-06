@@ -10,19 +10,6 @@ class Policy
 	use HandlesAuthorization;
 	
 	/**
-	 * @param User $user
-	 * @param $ability
-	 *
-	 * @return bool
-	 */
-	public function before(User $user, $ability)
-	{
-		if ($user->isSuperAdmin()) {
-			return true;
-		}
-	}
-	
-	/**
 	 * Determine whether the user can create models.
 	 *
 	 * @param  User $user
