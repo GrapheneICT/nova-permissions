@@ -96,6 +96,12 @@ Publish our Seeder with the following command:
 php artisan vendor:publish --provider="GrapheneICT\NovaPermissions\ToolServiceProvider" --tag="seeds"
 ```
 
+Before you do any seeding admin email parametar in  your env
+
+```env
+NOVA_PERMISSION_ADMIN_EMAIL = your@email.com
+```
+
 This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeds`. List all your Models you want to have Permissions for in the `$collection` Array.
 Create a role and attach permissions to it:
 
@@ -119,12 +125,13 @@ class RolesAndPermissionsSeeder extends Seeder
             // ... // List all your Models you want to have Permissions for.
         ]);
 
+        // Create an Admin Role and assign all Permissions
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo(Permission::all());
 
-         $user = App\Models\User::whereEmail('your@email.com')->first(); // Change this to your email.
-         $user->assignRole('super-admin');
-
+       // Give User Admin Role
+         $user = User::whereEmail($adminEmail)->first(); // Change this to your email.
+         $user->assignRole('admin');
     }
 }
 ```
@@ -136,10 +143,10 @@ Now you can seed the Database. Add `$this->call(RolesAndPermissionsSeeder::class
 ## Permissions
 
 ### Detail View
-![image](https://user-images.githubusercontent.com/22980168/86119952-bd004a00-bad3-11ea-97a0-9745e3e89997.PNG)
+![grap1](https://user-images.githubusercontent.com/22980168/86581659-aef17400-bf80-11ea-897d-f00952e1b2cc.PNG)
 
 ### Edit View
-![image](https://user-images.githubusercontent.com/22980168/86120039-e325ea00-bad3-11ea-87c0-ac7fc2f99c10.PNG)
+![grap2](https://user-images.githubusercontent.com/22980168/86581690-bf095380-bf80-11ea-85fc-3f06d2873547.PNG)
 
 ### Create a Model Policy
 

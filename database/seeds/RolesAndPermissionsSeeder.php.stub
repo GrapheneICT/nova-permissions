@@ -26,6 +26,12 @@ class RolesAndPermissionsSeeder extends Seeder
             // ... // List all your Models you want to have Permissions for.
         ]);
 
+        $adminEmail = env('NOVA_PERMISSION_ADMIN_EMAIL', null);
+
+        if (is_null($adminEmail)) {
+            throw new \InvalidArgumentException('Email parameter must be provided!');
+        }
+
         $collection->each(function ($item, $key) {
             // create permissions for each collection item
             $group = $this->getGroupName($item);
@@ -63,13 +69,13 @@ class RolesAndPermissionsSeeder extends Seeder
                     ]);
         });
 
-        // Create a Super-Admin Role and assign all Permissions
+        // Create an Admin Role and assign all Permissions
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo(Permission::all());
 
-        // Give User Super-Admin Role
-        // $user = App\Models\User::whereEmail('your@email.com')->first(); // Change this to your email.
-        // $user->assignRole('super-admin');
+       // Give User Admin Role
+         $user = User::whereEmail($adminEmail)->first(); // Change this to your email.
+         $user->assignRole('admin');
     }
 
     /**
