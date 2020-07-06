@@ -1,4 +1,4 @@
-@if (Auth::user()->can('view', Spatie\Permission\Models\Permission::class) || Auth::user()->can('view', Spatie\Permission\Models\Role::class))
+@if (Auth::user()->can('viewAny', Spatie\Permission\Models\Permission::class) || Auth::user()->can('viewAny', Spatie\Permission\Models\Role::class))
     <h3 class="flex items-center font-normal text-white mb-6 text-base no-underline">
         <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path fill="var(--sidebar-icon)"
@@ -8,7 +8,7 @@
             {{ __('Roles & Permissions') }}
     </span>
     </h3>
-    @can('view', Spatie\Permission\Models\Role::class)
+    @can('viewAny', Spatie\Permission\Models\Role::class)
         <ul class="list-reset mb-8">
             <li class="leading-wide mb-4 text-sm">
                 <router-link :to="{
@@ -21,7 +21,7 @@
                 </router-link>
             </li>
             @endcan
-            @can('view', Spatie\Permission\Models\Permission::class)
+            @can('viewAny', Spatie\Permission\Models\Permission::class)
                 <li class="leading-wide mb-4 text-sm">
                     <router-link :to="{
             name: 'index',
