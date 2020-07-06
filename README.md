@@ -125,6 +125,12 @@ class RolesAndPermissionsSeeder extends Seeder
             // ... // List all your Models you want to have Permissions for.
         ]);
 
+        $adminEmail = env('NOVA_PERMISSION_ADMIN_EMAIL', null);
+
+        if (is_null($adminEmail)) {
+            throw new \InvalidArgumentException('Email parameter must be provided!');
+        }
+
         // Create an Admin Role and assign all Permissions
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo(Permission::all());
