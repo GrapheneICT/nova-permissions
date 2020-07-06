@@ -58,24 +58,6 @@ public function tools()
 }
 ```
 
-If you want to hide the tool from certain users, you can write your custom logic for the ability to see the tool:
-
-```php
-// in app/Providers/NovaServiceProvider.php
-
-// ...
-
-public function tools()
-{
-    return [
-        // ...
-        (new \GrapheneICT\NovaPermissions\NovaPermissions())->canSee(function ($request) {
-            return $request->user()->isSuperAdmin();
-        }),
-    ];
-}
-```
-
 Finally, add `MorphToMany` fields to you `app/Nova/User` resource:
 
 ```php
@@ -106,24 +88,6 @@ class User extends Authenticatable
 }
 ```
 
-A Super Admin can do everything. If you extend our Policy, make sure to add a isSuperAdmin() Function to your App\User Model:
-
-> You can modify this function as you please.
-
-```php
-class User {
-    /**
-     * Determines if the User is a Super admin
-     * @return null
-    */
-    public function isSuperAdmin()
-    {
-        return $this->hasRole('super-admin');
-    }
-}
-```
-
-
 ### Database Seeding
 
 Publish our Seeder with the following command:
@@ -132,7 +96,8 @@ Publish our Seeder with the following command:
 php artisan vendor:publish --provider="GrapheneICT\NovaPermissions\ToolServiceProvider" --tag="seeds"
 ```
 
-This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeds`. List all your Models you want to have Permissions for in the `$collection` Array and change the email for the Super-Admin:
+This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeds`. List all your Models you want to have Permissions for in the `$collection` Array.
+Create a role and attach permissions to it:
 
 ```php
 class RolesAndPermissionsSeeder extends Seeder
@@ -153,7 +118,10 @@ class RolesAndPermissionsSeeder extends Seeder
             Permission::class,
             // ... // List all your Models you want to have Permissions for.
         ]);
-   
+
+        $role = Role::create(['name' => 'admin']);
+        $role->givePermissionTo(Permission::all());
+
          $user = App\Models\User::whereEmail('your@email.com')->first(); // Change this to your email.
          $user->assignRole('super-admin');
 

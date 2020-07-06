@@ -99,6 +99,9 @@ class Permission extends Resource
 				->creationRules('unique:' . config('permission.table_names.permissions'))
 				->updateRules('unique:' . config('permission.table_names.permissions') . ',name,{{resourceId}}'),
 			
+			Text::make(__('Description'), 'description')
+				->rules(['required', 'string', 'max:255']),
+			
 			Text::make(__('Group'), 'group'),
 			
 			Select::make(__('Guard Name'), 'guard_name')
