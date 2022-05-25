@@ -2,7 +2,7 @@
     "name": "graphene-ict/nova-permissions",
     "description": "Nova Permissions tool based on spatie permissions",
     "require": {
-        "php": "^8.1",
+        "php" : "^7.3|^8.0|^8.1",
         "spatie/laravel-permission": "5.*"
     },
     "license": "MIT",
